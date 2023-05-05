@@ -79,11 +79,11 @@
 
 
       function addToHistory(url) { 
-        const newImg = `<img height="100px" src=${url}`;
-        const updated = document.getElementById("history").innerHTML + newImg;
-        const history = (document.getElementById("history").innerHTML);
-        document.getElementById("history").innerHTML = updated;
-        console.log(updated);
+        const newImg = `<img height="100px" src=${url}/>`;
+        console.log(newImg);
+        const history =  document.getElementById("history");
+        history.insertAdjacentHTML('beforeend', newImg);
+        console.log(history);
       }
 
       function loadImage(e) { 
