@@ -103,8 +103,9 @@
 
 
     <script>
+      const imgSet = new Set();
       function isValidImageUrl(url) {
-          return url.match(/^https?:\/\/.+\/.+$/)
+          return url.match(/^https?:\/\/.+\/.+$/) && !imgSet.has(url);
       }
 
       function addToHistory(url) { 
@@ -118,19 +119,15 @@
       function loadImage(e) { 
         const imageUrl = document.getElementById('link').value;
         if (!isValidImageUrl(imageUrl)) { 
-          alert("Please enter valid image url");
+          alert("Please enter valid or not loaded image url");
           return;
         }
+        imgSet.add(imageUrl);
         const temp = document.getElementById('zoomed').src.trim();
         addToHistory(temp);
         document.getElementById('zoomed').src = imageUrl;
         // console.log(temp);
       }
-
-      /*
-        https://picsum.photos/seed/picsum/200/300
-      */
-
     </script>
 
 
