@@ -15,7 +15,7 @@
       <div id="images">
       <!--asdfsda -->
       <div>
-        <img id="zoomed" src="https://avatars.githubusercontent.com/u/56651041?s=400&u=b1d731c4277a501491d70efaf889c8c44f080077&v=4" alt="me">
+        <img id="zoomed" class="img-focus" src="https://avatars.githubusercontent.com/u/56651041?s=400&u=b1d731c4277a501491d70efaf889c8c44f080077&v=4" alt="me">
       </div>
 
       <div id="history">
@@ -36,10 +36,25 @@
       }
 
       body {
-          display: table-cell;
-          vertical-align: middle;
+          background-color: #FDFDFD;
+          font-family: 'Helvetica', 'Arial', sans-serif;
       }
 
+      #link { 
+        width: 100%;
+        height: 30px;
+      }
+
+
+      button { 
+        height: 36px;
+      }
+
+      #load { 
+        padding-bottom: 10px;
+        border-bottom: 2px solid black;
+        /* border-radius: 10%; */
+      }
 
       #images { 
         display: flex;
@@ -55,15 +70,27 @@
         gap: 10px;
       }
 
-      img {
+      .img-focus {
         border-radius: 10%;
         border: blue;
         border: 3px solid rgb(0, 0, 139);
         aspect-ratio: 1;
       }
 
+      .img-hist { 
+        border-radius: 10%;
+        border: grey;
+        border: 3px solid grey;
+        aspect-ratio: 1;
+      }
+
       #history { 
         width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        overflow-y: auto;
+        max-height: 600px;
       }
 
       #zoomed { 
@@ -76,10 +103,12 @@
 
 
     <script>
-
+      function isValidImageUrl(url) {
+          return url.match(/^https?:\/\/.+\/.+$/)
+      }
 
       function addToHistory(url) { 
-        const newImg = `<img height="100px" src=${url}/>`;
+        const newImg = `<img class="img-hist" height="100px" src=${url}/>`;
         console.log(newImg);
         const history =  document.getElementById("history");
         history.insertAdjacentHTML('beforeend', newImg);
@@ -88,6 +117,10 @@
 
       function loadImage(e) { 
         const imageUrl = document.getElementById('link').value;
+        if (!isValidImageUrl(imageUrl)) { 
+          alert("Please enter valid image url");
+          return;
+        }
         const temp = document.getElementById('zoomed').src.trim();
         addToHistory(temp);
         document.getElementById('zoomed').src = imageUrl;
