@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>merhaba</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+
+    <body>
+      <div id="load">
+        <input id="link" type="text">
+        <button onclick="loadImage()"> load</button>
+      </div>
+
+      <div id="images">
+      <!--asdfsda -->
+      <div>
+        <img id="zoomed" src="https://avatars.githubusercontent.com/u/56651041?s=400&u=b1d731c4277a501491d70efaf889c8c44f080077&v=4" alt="me">
+      </div>
+
+      <div id="history">
+        <h1>History</h1>
+      </div>
+
+      </div>
+    </body>
+
+    <style>
+      html, body {
+          height: 100%;
+      }
+
+      html {
+          display: table;
+          margin: auto;
+      }
+
+      body {
+          display: table-cell;
+          vertical-align: middle;
+      }
+
+
+      #images { 
+        display: flex;
+        flex-direction: row; 
+        gap: 30px;
+        margin-top: 30px;
+      }
+
+      #load { 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      img {
+        border-radius: 10%;
+        border: blue;
+        border: 3px solid rgb(0, 0, 139);
+        aspect-ratio: 1;
+      }
+
+      #history { 
+        width: 100%;
+      }
+
+      #zoomed { 
+        width: 300px;
+        height: 300px;
+      }
+
+    </style>
+
+
+
+    <script>
+
+
+      function addToHistory(url) { 
+        const newImg = `<img height="100px" src=${url}`;
+        const updated = document.getElementById("history").innerHTML + newImg;
+        const history = (document.getElementById("history").innerHTML);
+        document.getElementById("history").innerHTML = updated;
+        console.log(updated);
+      }
+
+      function loadImage(e) { 
+        const imageUrl = document.getElementById('link').value;
+        const temp = document.getElementById('zoomed').src.trim();
+        addToHistory(temp);
+        document.getElementById('zoomed').src = imageUrl;
+        // console.log(temp);
+      }
+
+      /*
+        https://picsum.photos/seed/picsum/200/300
+      */
+
+    </script>
+
+
+
+</html>
